@@ -5,20 +5,18 @@ const express = require("express");
 const morgan = require("morgan");
 
 const tornadoesRouter = require("./routes/tornadoes");
+const connectDB = require("./config/database");
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-if (
-	(process.env.NODE_ENV = "development")
-) {
+connectDB();
+
+if ((process.env.NODE_ENV = "development")) {
 	app.use(morgan("dev"));
 }
 
-app.use(
-	"/api/v1/tornadoes",
-	tornadoesRouter
-);
+app.use("/api/v1/tornadoes", tornadoesRouter);
 
 app.listen(
 	PORT,
