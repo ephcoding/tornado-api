@@ -3,7 +3,7 @@
 	"license": "ISC",
 	"name": "tornado-api",
 	"version": "0.1.0",
-	"description": "Storm Prediction  stats for every tornado ever recorded.",
+	"description": "Storm Prediction stats for every tornado ever recorded.",
 	"main": "src/server.js",
 	"keywords": [
 		"severe weather api",
@@ -21,7 +21,8 @@
 		"dotenv": "^16.3.1",
 		"express": "^4.18.1",
 		"mongodb": "^4.8.1",
-		"mongoose": "^6.3.5"
+		"mongoose": "^6.3.5",
+		"morgan": "^1.10.0"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.16"
