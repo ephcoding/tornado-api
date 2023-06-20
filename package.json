@@ -1,0 +1,29 @@
+{
+	"author": "Ephraim Smith <ephraim@modevx.com>",
+	"license": "ISC",
+	"name": "tornado-api",
+	"version": "0.1.0",
+	"description": "Storm Prediction  stats for every tornado ever recorded.",
+	"main": "src/server.js",
+	"keywords": [
+		"severe weather api",
+		"tornado api",
+		"tornado",
+		"tornadoes",
+		"severe weather"
+	],
+	"scripts": {
+		"start": "NODE_ENV=production node server",
+		"dev": "nodemon server"
+	},
+	"dependencies": {
+		"csvtojson": "^2.0.10",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.1",
+		"mongodb": "^4.8.1",
+		"mongoose": "^6.3.5"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.16"
+	}
+}
