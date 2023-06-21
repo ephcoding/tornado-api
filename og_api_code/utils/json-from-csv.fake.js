@@ -1,41 +1,52 @@
 const getJson = require("csvtojson");
 const fs = require("fs");
-const csvFile = "./src/data/swd-single-track-tornadoes.csv";
+const singleTrackTornadoesCsv =
+	"./src/data/swd-single-track-tornadoes.csv";
 
-function generateRandomIndexes(csvFile, entries) {
+function generateRandomIndexes(sampleSize) {
 	let indexes = [];
-	for (let i = 0; i < entries; i++) {
-		indexes = [...indexes, Math.floor(Math.random() * 65162) + 1];
+	for (let i = 0; i < sampleSize; i++) {
+		indexes = [
+			...indexes,
+			Math.floor(Math.random() * 65162) + 1,
+		];
 	}
 	return indexes;
 }
 
-function createFakeJsonFromCsv(csvFile, entries) {
-	const indexes = generateRandomIndexes(csvFile, entries);
-	let fakeData = [];
+function createSampleDataFromSpcCsv(spcCsv, sampleSize) {
+	const randomeIndexes = generateRandomIndexes(sampleSize);
+	let sampleTornadoData = [];
 
 	getJson()
-		.fromFile(csvFile)
-		.then((rows) => {
-			indexes.forEach((value) => {
-				fakeData = [...fakeData, rows[value]];
+		.fromFile(spcCsv)
+		.then((spcCsvRows) => {
+			randomeIndexes.forEach((randomIndex) => {
+				sampleTornadoData = [
+					...sampleTornadoData,
+					spcCsvRows[randomIndex],
+				];
 			});
 
-			fakeData.sort(
-				(a, b) => a.date.split("-").join("") - b.date.split("-").join("")
+			sampleTornadoData.sort(
+				(a, b) =>
+					a.date.split("-").join("") -
+					b.date.split("-").join("")
 			);
 
-			fakeData.forEach((tornado, index) => (tornado.id = index));
+			sampleTornadoData.forEach(
+				(tornado, index) => (tornado.id = index)
+			);
 
 			fs.writeFile(
-				"src/data/fakeData.json",
-				JSON.stringify(fakeData),
+				"data/sample-tornado-data.json",
+				JSON.stringify(sampleTornadoData),
 				(error) => {
 					if (error) throw error;
-					console.log("Fake Data Generated!");
+					console.log("Sample Tornado Data Generated!");
 				}
 			);
 		});
 }
 
-createFakeJsonFromCsv(csvFile, 25);
+createSampleDataFromSpcCsv(singleTrackTornadoesCsv, 25);
