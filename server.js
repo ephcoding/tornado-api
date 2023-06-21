@@ -24,3 +24,10 @@ app.listen(
 		`Server up in ${process.env.NODE_ENV} mode running on port ${PORT}`
 	)
 );
+
+process.on(
+	"unhandledRejection",
+	(error, promise) => {
+		console.log(`>> ERROR >>\n`, error.message);
+	}
+);
