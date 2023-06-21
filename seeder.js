@@ -12,14 +12,14 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 const tornadoes = JSON.parse(
 	fs.readFileSync(
-		`${__dirname}/data/singe-track-tornadoes.json`,
+		`${__dirname}/data/seed_1950_2022_single_track_tornadoes.json`,
 		"utf-8"
 	)
 );
 
 const importTornadoes = async () => {
 	try {
-		await TornadoModel.create(tornadoes);
+		await TornadoModel.insertMany(tornadoes);
 		console.log(
 			"Tornadoes imported to MongoDB from SPC single-track tornadoes csv"
 		);
@@ -31,7 +31,7 @@ const importTornadoes = async () => {
 
 const deleteAllTornadoes = async () => {
 	try {
-		await TornadoModel.create(tornadoes);
+		await TornadoModel.deleteMany(tornadoes);
 		console.log(
 			"Tornadoes imported to MongoDB from SPC single-track tornadoes csv"
 		);
