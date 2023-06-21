@@ -1,7 +1,5 @@
-const getJson = require("csvtojson");
+const csv = require("csvtojson");
 const fs = require("fs");
-const singleTrackTornadoesCsv =
-	"./src/data/swd-single-track-tornadoes.csv";
 
 function generateRandomIndexes(sampleSize) {
 	let indexes = [];
@@ -14,39 +12,30 @@ function generateRandomIndexes(sampleSize) {
 	return indexes;
 }
 
-function createSampleDataFromSpcCsv(spcCsv, sampleSize) {
+const createSampleDataFromSpcCsv = async (
+	spcCsv,
+	sampleSize
+) => {
 	const randomeIndexes = generateRandomIndexes(sampleSize);
-	let sampleTornadoData = [];
+	const jsonRowsFromCsvFile = await csv().fromFile(spcCsv);
 
-	getJson()
-		.fromFile(spcCsv)
-		.then((spcCsvRows) => {
-			randomeIndexes.forEach((randomIndex) => {
-				sampleTornadoData = [
-					...sampleTornadoData,
-					spcCsvRows[randomIndex],
-				];
-			});
-
-			sampleTornadoData.sort(
-				(a, b) =>
-					a.date.split("-").join("") -
-					b.date.split("-").join("")
-			);
-
-			sampleTornadoData.forEach(
-				(tornado, index) => (tornado.id = index)
-			);
-
-			fs.writeFile(
-				"data/sample-tornado-data.json",
-				JSON.stringify(sampleTornadoData),
-				(error) => {
-					if (error) throw error;
-					console.log("Sample Tornado Data Generated!");
-				}
-			);
+	const sampleTornadoData = randomeIndexes.map((index) => {
+		return Object.assign(jsonRowsFromCsvFile[index], {
+			id: index,
 		});
-}
+	});
 
-createSampleDataFromSpcCsv(singleTrackTornadoesCsv, 25);
+	fs.writeFile(
+		"data/sample-tornado-data.json",
+		JSON.stringify(sampleTornadoData),
+		(error) => {
+			if (error) throw error;
+			console.log("Sample Tornado Data Generated!");
+		}
+	);
+};
+
+createSampleDataFromSpcCsv(
+	"./data/spc_1950_2022_single_track_tornadoes.csv",
+	25
+);
