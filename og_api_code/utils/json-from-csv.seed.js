@@ -1,20 +1,25 @@
-const getJson = require("csvtojson");
+const csv = require("csvtojson");
 const fs = require("fs");
-const csvFile = "./src/data/swd-single-track-tornadoes.csv";
-const destFilePath = "src/db/single-track-tornadoes-seed.json";
+const singleTrackTornadoCsv =
+	"./src/data/swd-single-track-tornadoes.csv";
+const destFilePath = "data/single-track-tornadoes.json";
 
-function createSeedData(csvFile, destinationFilePath) {
-	getJson()
-		.fromFile(csvFile)
-		.then(async (rows) => {
-			fs.writeFile(destinationFilePath, JSON.stringify(rows), (error) => {
+const createJsonFileFromCsv = async (csvFile, destPath) => {
+	const csvRows = await csv().fromFile(csvFile);
+
+	csvRows.forEach().then(async (rows) => {
+		fs.writeFile(
+			destPath,
+			JSON.stringify(rows),
+			(error) => {
 				if (error) throw Error;
 				console.log("JSON Tornadoes Created!");
-			});
-		});
-}
+			}
+		);
+	});
+};
 
-function convertCsvRowToObj(row) {
+function convertRowToTornadoObject(row) {
 	const docObj = {
 		nwsNumber: row.om,
 		stateNumForYear: row.stn,
@@ -63,10 +68,14 @@ function convertCsvRowToObj(row) {
 	return docObj;
 }
 function writeJsonToFile(destFilePath, jsonData) {
-	fs.writeFile(destFilePath, JSON.stringify(jsonData), (error) => {
-		if (error) throw Error;
-		console.log("JSON Tornadoes Created!");
-	});
+	fs.writeFile(
+		destFilePath,
+		JSON.stringify(jsonData),
+		(error) => {
+			if (error) throw Error;
+			console.log("JSON Tornadoes Created!");
+		}
+	);
 }
 
-createSeedData(csvFile, destFilePath);
+createJsonFileFromCsv(singleTrackTornadoCsv, destFilePath);
