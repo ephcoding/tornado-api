@@ -9,10 +9,11 @@ const TornadoSchema = new mongoose.Schema({
 	month: { type: Number, index: true, min: 1, max: 12 },
 	day: { type: Number, min: 1, max: 31 },
 	date: { type: Date },
-	time: { type: Date },
+	time: { type: String },
 	timezone: {
-		type: mongoose.Schema.Types.Mixed,
-		validate: (val) => ["?", 9, 3].includes(val),
+		type: String,
+		// type: mongoose.Schema.Types.Mixed,
+		// validate: (val) => ["?", "9", "3"].includes(val),
 	},
 	stateAbbreviation: {
 		type: String,
