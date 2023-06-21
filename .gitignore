@@ -3,3 +3,4 @@ config/config.env
 .env
 yarn.lock
 .DS_Store
+.vscode
