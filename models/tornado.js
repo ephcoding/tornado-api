@@ -1,44 +1,56 @@
 const mongoose = require("mongoose");
 
-// -- current indexes
-// year, stateAbbr, fscale
 const TornadoSchema = new mongoose.Schema({
-	// -- added props
+	// ADDED PROPS
 	created: { type: Date, default: Date.now },
 	updated: { type: Date, default: Date.now },
-	// -- straight from SPC SWD format spec
-	nws_number: Number,
-	yr: { type: Number, index: true, min: 1950 },
-	mo: { type: Number, min: 1, max: 12 },
-	dy: { type: Number, min: 1, max: 31 },
+	nwsNumber: Number,
+	year: { type: Number, index: true, min: 1950 },
+	month: { type: Number, index: true, min: 1, max: 12 },
+	day: { type: Number, min: 1, max: 31 },
 	date: { type: Date },
 	time: { type: Date },
-	tz: {
+	timezone: {
 		type: mongoose.Schema.Types.Mixed,
 		validate: (val) => ["?", 9, 3].includes(val),
 	},
-	st: { type: String, index: true, trim: true },
-	stf: { type: Number },
-	stn: { type: Number },
-	f: { type: Number, index: true, enum: [-9, 0, 1, 2, 3, 4, 5] },
-	inj: { type: Number },
-	fat: { type: Number },
-	loss: { type: mongoose.Schema.Types.Decimal128 },
-	closs: { type: mongoose.Schema.Types.Decimal128 },
-	slat: { type: mongoose.Schema.Types.Decimal128 },
-	slon: { type: mongoose.Schema.Types.Decimal128 },
-	elat: { type: mongoose.Schema.Types.Decimal128 },
-	elon: { type: mongoose.Schema.Types.Decimal128 },
-	len: { type: mongoose.Schema.Types.Decimal128 },
-	wid: { type: Number },
-	ns: { type: Number },
-	sn: { type: Boolean },
-	sg: { type: Number },
-	f1: { type: Number },
-	f2: { type: Number },
-	f3: { type: Number },
-	f4: { type: Number },
-	fc: { type: Boolean },
+	stateAbbreviation: {
+		type: String,
+		index: true,
+		trim: true,
+	},
+	stateName: {
+		type: String,
+	},
+	stateFips: { type: Number },
+	stateNumForYear: { type: Number },
+	fScale: {
+		type: Number,
+		index: true,
+		enum: [-9, 0, 1, 2, 3, 4, 5],
+	},
+	injuries: { type: Number },
+	fatalities: { type: Number },
+	propertyDamage: {
+		type: mongoose.Schema.Types.Decimal128,
+	},
+	cropDamage: { type: mongoose.Schema.Types.Decimal128 },
+	startLatitude: { type: mongoose.Schema.Types.Decimal128 },
+	startLongitude: {
+		type: mongoose.Schema.Types.Decimal128,
+	},
+	endLatitude: { type: mongoose.Schema.Types.Decimal128 },
+	endLongitude: { type: mongoose.Schema.Types.Decimal128 },
+	lengthInMiles: { type: mongoose.Schema.Types.Decimal128 },
+	widthInYards: { type: Number },
+	affectedStatesCount: { type: Number },
+	isEntireTrackInState: { type: Boolean },
+	segmentNumber: { type: Number },
+	county1fips: { type: Number },
+	county2fips: { type: Number },
+	county3fips: { type: Number },
+	county4fips: { type: Number },
+	isChangedFScale: { type: Boolean },
 });
 
 module.exports = mongoose.model("Tornado", TornadoSchema);
