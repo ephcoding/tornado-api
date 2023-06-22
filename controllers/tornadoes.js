@@ -1,17 +1,30 @@
+const Tornado = require("../models/tornado");
+
 // @desc    get all tornadoes
 // @route   GET /api/v1/tornadoes
 // @access  Public
 exports.getAllTornadoes = (req, res, next) => {
-	res.status(200).json({ responseOK: true, data: "return all tornadoes" });
+	res.status(200).json({
+		responseOK: true,
+		data: "return all tornadoes",
+	});
 };
 
 // @desc    get single tornado by id
 // @route   GET /api/v1/tornadoes/:id
 // @access  Public
-exports.getTornadoById = (req, res, next) => {
-	res
-		.status(200)
-		.json({ responseOK: true, data: `get tornado with id: ${req.params.id}` });
+exports.getTornadoById = async (req, res, next) => {
+	try {
+		const tornado = await Tornado.findById(req.params.id);
+
+		if (!tornado) {
+			return res.status(400).json({ success: false });
+		}
+
+		res.status(200).json({ success: true, data: tornado });
+	} catch (error) {
+		res.status(400).json({ status: 400 });
+	}
 };
 
 // @desc    Add new tornado
