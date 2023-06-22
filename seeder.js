@@ -31,9 +31,9 @@ const importTornadoes = async () => {
 
 const deleteAllTornadoes = async () => {
 	try {
-		await TornadoModel.deleteMany(tornadoes);
+		await TornadoModel.deleteMany();
 		console.log(
-			"Tornadoes imported to MongoDB from SPC single-track tornadoes csv"
+			"All tornado documents removed from MongoDB"
 		);
 		process.exit();
 	} catch (error) {
