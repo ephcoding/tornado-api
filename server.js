@@ -16,7 +16,7 @@ if ((process.env.NODE_ENV = "development")) {
 	app.use(morgan("dev"));
 }
 
-app.use("/api/v1/tornadoes", tornadoesRouter);
+app.use("/v1/tornadoes", tornadoesRouter);
 
 app.listen(
 	PORT,
@@ -25,9 +25,6 @@ app.listen(
 	)
 );
 
-process.on(
-	"unhandledRejection",
-	(error, promise) => {
-		console.log(`>> ERROR >>\n`, error.message);
-	}
-);
+process.on("unhandledRejection", (error, promise) => {
+	console.log(`>> ERROR >>\n`, error.message);
+});
