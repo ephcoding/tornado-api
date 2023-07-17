@@ -3,10 +3,10 @@
 	"license": "ISC",
 	"name": "tornado-api",
 	"version": "0.1.0",
-	"description": "Storm Prediction stats for every tornado ever recorded.",
+	"description": "Storm Prediction stats for every tornado recorded since 1950.",
 	"main": "src/server.js",
 	"keywords": [
-		"severe weather api",
+		"api",
 		"tornado api",
 		"tornado",
 		"tornadoes",
