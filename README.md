@@ -219,6 +219,10 @@ tornado-api/....................root directory
   <br/>
 </div>
 
+<div align='center'>
+  <img alt='headshot of Ephraim Smith' src='./images/mugshot.jpg' height="150" width="150">
+</div>
+
  <div align='center'>
     <a href='https://github.com/ephcoding' alt='github icon'>
       <img src='./images/icon-gh.svg' height='40'/>
