@@ -96,6 +96,9 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
   <br/>
 </div>
 
+<details>
+<summary><strong>Install & Run Your Own Instance of the Tornado API</strong></summary>
+
 ### **Clone The Repo**
 
 ```shellscript
@@ -130,17 +133,17 @@ OR
 yarn  dev
 ```
 
-_Every project is set up different. Give users the rundown on the various working parts of your project._
+</details>
 
-### **Project Structure**
+<details>
+<summary><strong>Project Structure</strong></summary>
 
 ```shellscript
-
 tornado-api/....................root directory
   config/.......................database & deployment configs
-  constants/....................manage project-wide variables from one folder
+  constants/....................manage project-wide variables here
   controllers/..................endpoint-handling logic
-  data/.........................seed data files
+  data/.........................source and seed data files
   images/.......................graphic assets for README.md
   models/.......................database object definitions
   routes/.......................request routing
@@ -151,33 +154,68 @@ tornado-api/....................root directory
   yarn.lock.....................dependency lock file
 ```
 
-### **Dependencies**
+</details>
+
+<details>
+<summary><strong>Code Features</strong></summary>
+
+#### **_`config/`_**
+
+- `config.env` | you'll need to create your own `config.env` with the following:
+
+```shellscript
+MONGODB_URI=<your MongoDB remote url string>
+MONGODB_LOCAL_URI=<your local MongoDB instance url string>
+NODE_ENV=development
+PORT=<port#>
+```
+
+#### **_`middleware/`_**
+
+- `async-handler.js` | async wrapper for controller functions. Eliminates the need for a try/catch block in every controller function.
+- `error-handler.js` | handles various potential Mongoose & server errors.
+- `logging-handler.js` | used to log incoming requests
+- `query-builder.js` | handles incoming requests that include query params and/or filters.
+
+#### **_`utils/`_**
+
+- `ErrorResponse` | class for streamlining new Error instantiation
+- `json-from-csv.seed.js` | converts `single_track_tornadoes.csv` into `single_track_tornadoes.json` for seeding MongoDB
+
+#### **_`(root)/`_**
+
+- `seeder.js` | seeds tornado data into MongoDB using `single_track_tornadoes.json`
+
+</details>
+
+<details>
+<summary><strong>Dependencies</strong></summary>
 
 #### **_Production_**
 
-[`csvtojson`]() | asdf
-
-[`dotenv`]() | asdf
-
-[`express`]() | asdf
-
-[`mongodb`]() | asdf
-
-[`mongoose`]() | asdf
-
-[`morgan`]() | asdf
+- [`csvtojson`](https://www.npmjs.com/package/csvtojson) | .csv parser that converts .csv to .json
+- [`dotenv`](https://www.npmjs.com/package/dotenv) | loads `.env` variables into `process.env`
+- [`express`](https://www.npmjs.com/package/express) | Node.js web framework
+- [`mongodb`](https://www.npmjs.com/package/mongodb) | Node.js driver for MongoDB
+- [`mongoose`](https://www.npmjs.com/package/mongoose) | async MongoDB object modeler
+- [`morgan`](https://www.npmjs.com/package/morgan) | Node.js HTTP request logging middleware
 
 #### **_Development_**
 
-[`nodemon`]() | asdf
+- [`nodemon`](https://www.npmjs.com/package/nodemon) | restarts Node.js apps when file changes are made
 
-### **Scripts**
+</details>
+
+<details>
+<summary><strong>Scripts</strong></summary>
 
 `"start"` | sets `NODE_ENV` to "production" and starts server
 
-`"dev"` | starts the development server using `nodemon` which restarts the server when changes are saved
+`"dev"` | starts the development server using `nodemon`
 
-<br>
+</details>
+
+<br/>
 
 <div id='contribute' align='center'>
   <img alt='readme contribute graphic' src='./images/contribute.png'>
