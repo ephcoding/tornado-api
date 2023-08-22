@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const { queryBuilder } = require("../middleWare/query-builder");
+
+const TornadoModel = require("../models/Tornado");
 
 const {
 	getAllTornadoes,
@@ -9,15 +12,8 @@ const {
 	deleteTornadoById,
 } = require("../controllers/tornadoes");
 
-router
-	.route("/")
-	.get(getAllTornadoes)
-	.post(createTornado);
+router.route("/").get(queryBuilder(TornadoModel), getAllTornadoes);
 
-router
-	.route("/:id")
-	.get(getTornadoById)
-	.put(updateTornadoById)
-	.delete(deleteTornadoById);
+router.route("/:id").get(getTornadoById);
 
 module.exports = router;

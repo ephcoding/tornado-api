@@ -1,5 +1,5 @@
 // @desc handles incoming request queries & filters
-exports.queryBuilder = (model, populate) => async (req, res, next) => {
+exports.queryBuilder = (model) => async (req, res, next) => {
 	let query;
 	const reqQuery = { ...req.query };
 	let queryStr = JSON.stringify(reqQuery);
@@ -10,6 +10,11 @@ exports.queryBuilder = (model, populate) => async (req, res, next) => {
 	);
 
 	query = model.find(JSON.parse(queryStr));
+
+	// query = Tornado.find(
+	// 	JSON.parse(queryStr),
+	// 	"date nwsNumber stateFips county1fips fScale injuries fatalities"
+	// ).sort({ date: 1 });
 
 	const results = await query;
 
