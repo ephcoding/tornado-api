@@ -7,8 +7,8 @@ require("dotenv").config({
 const TornadoModel = require("./models/Tornado");
 
 mongoose.connect(
-	// process.env.MONGODB_URI,
-	process.env.MONGODB_LOCAL_URI,
+	// process.env.MONGODB_URI_PROD,
+	process.env.MONGODB_URI_LOCAL,
 	{
 		useNewUrlParser: true,
 	}

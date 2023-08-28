@@ -23,6 +23,44 @@ exports.getTornadoById = asyncHandler(async (req, res, next) => {
 	res.status(200).json({ success: true, data: tornado });
 });
 
+// @desc    get tornado count by year for each state
+// @route   GET /api/v1/tornadoes/count/:state/:year
+// @access  Public
+exports.getTornadoYearCountByState = asyncHandler(async (req, res, next) => {
+	const { year } = req.params;
+	const yearCountsByState = await Tornado.aggregate([
+		{
+			$match: { year: year },
+		},
+		{
+			$group: { _id: "$state_abbr" },
+		},
+		{ $sort: { _id: -1 } },
+	]);
+
+	if (!yearCountsByState) {
+		return next(
+			new ErrorResponse("Error getting tornado year counts by state", 404)
+		);
+	}
+	console.log("STATE YEAR COUNT >> \n", req.params);
+	res.status(200).json({ success: true, data: yearCountsByState });
+});
+
+// @desc    get tornado count by year for each month
+// @route   GET /api/v1/tornadoes/count/:state/:year
+// @access  Public
+exports.getTornadoYearCountByMonth = asyncHandler(async (req, res, next) => {
+	const { year, month } = req.params;
+	const tornadoes = await Tornado.find({ state_abbr: state, year: year });
+
+	if (!tornadoes) {
+		return next(new ErrorResponse(`Tornado with id of ${id}`, 404));
+	}
+	console.log("STATE YEAR COUNT >> \n", req.params);
+	res.status(200).json({ success: true, data: tornadoes.length });
+});
+
 // @desc    Add new tornado
 // @route   POST /api/v1/tornadoes/:id
 // @access  Private

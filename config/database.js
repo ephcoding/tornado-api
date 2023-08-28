@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
 	const dbConnection = await mongoose.connect(
-		// process.env.MONGODB_URI,
-		process.env.MONGODB_LOCAL_URI,
+		// process.env.MONGODB_URI_PROD,
+		process.env.MONGODB_URI_LOCAL,
 		{ useNewUrlParser: true }
 	);
 
