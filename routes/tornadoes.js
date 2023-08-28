@@ -8,12 +8,14 @@ const {
 	getAllTornadoes,
 	getTornadoById,
 	getTornadoYearCountByMonth,
+	getTornadoYearCountByScale,
 	getTornadoYearCountByState,
 } = require("../controllers/tornadoes");
 
 router.route("/").get(queryBuilder(TornadoModel), getAllTornadoes);
 router.route("/:id").get(getTornadoById);
-router.route("/count/state/:year").get(getTornadoYearCountByState);
 router.route("/count/month/:year").get(getTornadoYearCountByMonth);
+router.route("/count/scale/:year").get(getTornadoYearCountByScale);
+router.route("/count/state/:year").get(getTornadoYearCountByState);
 
 module.exports = router;

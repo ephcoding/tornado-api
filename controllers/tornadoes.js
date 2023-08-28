@@ -23,39 +23,6 @@ exports.getTornadoById = asyncHandler(async (req, res, next) => {
 	res.status(200).json({ success: true, data: tornado });
 });
 
-// @desc    get tornado count by year for each state
-// @route   GET /api/v1/tornadoes/count/state/:year
-// @access  Public
-exports.getTornadoYearCountByState = asyncHandler(async (req, res, next) => {
-	const { year } = req.params;
-
-	const yearCountsByState = await Tornado.aggregate([
-		{
-			$match: { year: parseInt(year) },
-		},
-		{
-			$group: {
-				_id: "$state_abbr",
-				count: {
-					$count: {},
-				},
-			},
-		},
-		{
-			$sort: {
-				count: -1,
-			},
-		},
-	]);
-
-	if (!yearCountsByState) {
-		return next(
-			new ErrorResponse("Error getting tornado year counts by state", 404)
-		);
-	}
-	res.status(200).json({ success: true, data: yearCountsByState });
-});
-
 // @desc    get tornado count by year for each month
 // @route   GET /api/v1/tornadoes/count/month/:year
 // @access  Public
@@ -88,6 +55,73 @@ exports.getTornadoYearCountByMonth = asyncHandler(async (req, res, next) => {
 	}
 
 	res.status(200).json({ success: true, data: yearCountsByMonth });
+});
+
+// @desc    get tornado count by year for each f-scale
+// @route   GET /api/v1/tornadoes/count/scale/:year
+// @access  Public
+exports.getTornadoYearCountByScale = asyncHandler(async (req, res, next) => {
+	const { year } = req.params;
+
+	const yearCountsByScale = await Tornado.aggregate([
+		{
+			$match: { year: parseInt(year) },
+		},
+		{
+			$group: {
+				_id: "$scale",
+				count: {
+					$count: {},
+				},
+			},
+		},
+		{
+			$sort: {
+				count: -1,
+			},
+		},
+	]);
+
+	if (!yearCountsByScale) {
+		return next(
+			new ErrorResponse("Error getting tornado year counts by scale", 404)
+		);
+	}
+
+	res.status(200).json({ success: true, data: yearCountsByScale });
+});
+
+// @desc    get tornado count by year for each state
+// @route   GET /api/v1/tornadoes/count/state/:year
+// @access  Public
+exports.getTornadoYearCountByState = asyncHandler(async (req, res, next) => {
+	const { year } = req.params;
+
+	const yearCountsByState = await Tornado.aggregate([
+		{
+			$match: { year: parseInt(year) },
+		},
+		{
+			$group: {
+				_id: "$state_abbr",
+				count: {
+					$count: {},
+				},
+			},
+		},
+		{
+			$sort: {
+				count: -1,
+			},
+		},
+	]);
+
+	if (!yearCountsByState) {
+		return next(
+			new ErrorResponse("Error getting tornado year counts by state", 404)
+		);
+	}
+	res.status(200).json({ success: true, data: yearCountsByState });
 });
 
 // @desc    Add new tornado

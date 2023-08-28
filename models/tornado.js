@@ -12,23 +12,17 @@ const TornadoSchema = new mongoose.Schema({
 	time: { type: String },
 	timezone: {
 		type: String,
-		// type: mongoose.Schema.Types.Mixed,
-		// validate: (val) => ["?", "9", "3"].includes(val),
 	},
 	state_abbr: {
 		type: String,
 		index: true,
 		trim: true,
 	},
-	// stateName: {
-	// 	type: String,
-	// },
 	state_fips: { type: Number },
 	state_yr_num: { type: Number },
 	scale: {
 		type: Number,
 		index: true,
-		enum: [-9, 0, 1, 2, 3, 4, 5],
 	},
 	injuries: { type: Number },
 	deaths: { type: Number },

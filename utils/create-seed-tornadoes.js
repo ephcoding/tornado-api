@@ -29,7 +29,7 @@ const createJsonFileFromCsv = async () => {
 			state_abbr: tornado.st,
 			state_fips: tornado.stf,
 			state_yr_num: tornado.stn,
-			scale: tornado.f,
+			scale: tornado.mag,
 			injuries: tornado.inj,
 			deaths: tornado.fat,
 			damage: tornado.loss,

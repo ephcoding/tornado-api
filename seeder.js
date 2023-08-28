@@ -14,15 +14,15 @@ mongoose.connect(
 	}
 );
 
-const tornadoes = JSON.parse(
-	fs.readFileSync(`${__dirname}/data/single_track_tornadoes.json`, "utf-8")
-);
+const importTornadoes = async () => {
+	const tornadoes = JSON.parse(
+		fs.readFileSync(`${__dirname}/data/single_track_tornadoes.json`, "utf-8")
+	);
 
-const importTornadoes = async (objArr) => {
 	try {
-		await TornadoModel.insertMany(objArr);
+		await TornadoModel.insertMany(tornadoes);
 		console.log(
-			`${objArr.length} tornadoes imported into ${process.env.MONGODB_LOCAL_URI} using "data/single_track_tornadoes.json"`
+			`${tornadoes.length} tornadoes imported into ${process.env.MONGODB_URI_LOCAL} using "data/single_track_tornadoes.json"`
 		);
 		process.exit();
 	} catch (error) {
@@ -40,8 +40,8 @@ const deleteAllTornadoes = async () => {
 	}
 };
 
-if (process.argv[2] === "-import") {
-	importTornadoes(tornadoes);
-} else if (process.argv[2] === "-delete-all") {
+if (process.argv[2] === "-i") {
+	importTornadoes();
+} else if (process.argv[2] === "-d") {
 	deleteAllTornadoes();
 }
