@@ -24,18 +24,28 @@ exports.getTornadoById = asyncHandler(async (req, res, next) => {
 });
 
 // @desc    get tornado count by year for each state
-// @route   GET /api/v1/tornadoes/count/:state/:year
+// @route   GET /api/v1/tornadoes/count/state/:year
 // @access  Public
 exports.getTornadoYearCountByState = asyncHandler(async (req, res, next) => {
 	const { year } = req.params;
+
 	const yearCountsByState = await Tornado.aggregate([
 		{
-			$match: { year: year },
+			$match: { year: parseInt(year) },
 		},
 		{
-			$group: { _id: "$state_abbr" },
+			$group: {
+				_id: "$state_abbr",
+				count: {
+					$count: {},
+				},
+			},
 		},
-		{ $sort: { _id: -1 } },
+		{
+			$sort: {
+				count: -1,
+			},
+		},
 	]);
 
 	if (!yearCountsByState) {
@@ -43,7 +53,6 @@ exports.getTornadoYearCountByState = asyncHandler(async (req, res, next) => {
 			new ErrorResponse("Error getting tornado year counts by state", 404)
 		);
 	}
-	console.log("STATE YEAR COUNT >> \n", req.params);
 	res.status(200).json({ success: true, data: yearCountsByState });
 });
 

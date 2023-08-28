@@ -12,6 +12,6 @@ const {
 
 router.route("/").get(queryBuilder(TornadoModel), getAllTornadoes);
 router.route("/:id").get(getTornadoById);
-router.route("/count/:year/state").get(getTornadoYearCountByState);
+router.route("/count/state/:year").get(getTornadoYearCountByState);
 
 module.exports = router;
