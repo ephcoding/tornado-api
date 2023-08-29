@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const expressRouter = express.Router();
 const { queryBuilder } = require("../middleWare/query-builder");
 
 const TornadoModel = require("../models/Tornado");
@@ -12,10 +12,10 @@ const {
   getTornadoCountForYearByState,
 } = require("../controllers/tornadoes");
 
-router.route("/").get(queryBuilder(TornadoModel), getAllTornadoes);
-router.route("/:id").get(getTornadoById);
-router.route("/count/month/:year").get(getTornadoCountForYearByMonth);
-router.route("/count/scale/:year").get(getTornadoCountForYearByScale);
-router.route("/count/state/:year").get(getTornadoCountForYearByState);
+expressRouter.route("/").get(queryBuilder(TornadoModel), getAllTornadoes);
+expressRouter.route("/:id").get(getTornadoById);
+expressRouter.route("/count/month/:year").get(getTornadoCountForYearByMonth);
+expressRouter.route("/count/scale/:year").get(getTornadoCountForYearByScale);
+expressRouter.route("/count/state/:year").get(getTornadoCountForYearByState);
 
-module.exports = router;
+module.exports = expressRouter;
