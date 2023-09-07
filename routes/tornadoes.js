@@ -2,14 +2,14 @@ const express = require("express");
 const expressRouter = express.Router();
 const { queryBuilder } = require("../middleWare/query-builder");
 
-const TornadoModel = require("../models/Tornado");
+const TornadoModel = require("../models/tornado.js");
 
 const {
-  getAllTornadoes,
-  getTornadoById,
-  getTornadoCountForYearByMonth,
-  getTornadoCountForYearByScale,
-  getTornadoCountForYearByState,
+	getAllTornadoes,
+	getTornadoById,
+	getTornadoCountForYearByMonth,
+	getTornadoCountForYearByScale,
+	getTornadoCountForYearByState,
 } = require("../controllers/tornadoes");
 
 expressRouter.route("/").get(queryBuilder(TornadoModel), getAllTornadoes);
