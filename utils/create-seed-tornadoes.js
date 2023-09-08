@@ -29,15 +29,15 @@ const createJsonFileFromCsv = async () => {
 			state_abbr: tornado.st,
 			state_fips: tornado.stf,
 			state_yr_num: tornado.stn,
-			scale: tornado.mag,
+			magnitude: tornado.mag,
 			injuries: tornado.inj,
-			deaths: tornado.fat,
-			damage: tornado.loss,
+			fatalities: tornado.fat,
+			property_loss: tornado.loss,
 			crop_loss: tornado.closs,
-			start_lat: tornado.slat,
-			start_lon: tornado.slon,
-			end_lat: tornado.elat,
-			end_lon: tornado.elon,
+			start_latitude: tornado.slat,
+			start_longitude: tornado.slon,
+			end_latitude: tornado.elat,
+			end_longitude: tornado.elon,
 			length_miles: tornado.len,
 			width_yards: tornado.wid,
 			impacted_states: tornado.ns,
@@ -55,16 +55,10 @@ const createJsonFileFromCsv = async () => {
 };
 
 function writeJsonToFile(jsonData, count) {
-	fs.writeFile(
-		"data/single_track_tornadoes.json",
-		JSON.stringify(jsonData),
-		(error) => {
-			if (error) throw Error;
-			console.log(
-				`"data/single_track_tornadoes.json" created with ${count} entries.`
-			);
-		}
-	);
+	fs.writeFile("data/TornadoesC.json", JSON.stringify(jsonData), (error) => {
+		if (error) throw Error;
+		console.log(`"data/TornadoesC.json" created with ${count} entries.`);
+	});
 }
 
 createJsonFileFromCsv();

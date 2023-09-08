@@ -4,7 +4,7 @@ require("dotenv").config({
 	path: "./config/config.env",
 });
 
-const TornadoModel = require("./models/Tornado");
+const TornadoModel = require("./models/Tornado.js");
 
 mongoose.connect(
 	// process.env.MONGODB_URI_PROD,
@@ -16,7 +16,7 @@ mongoose.connect(
 
 const importTornadoes = async () => {
 	const tornadoes = JSON.parse(
-		fs.readFileSync(`${__dirname}/data/single_track_tornadoes.json`, "utf-8")
+		fs.readFileSync(`${__dirname}/data/TornadoesC.json`, "utf-8")
 	);
 
 	try {
