@@ -1,5 +1,4 @@
 {
-	"type": "module",
 	"author": "Ephraim Smith <ephraim@modevx.com>",
 	"license": "ISC",
 	"name": "tornado-api",

@@ -7,7 +7,7 @@ const connectDB = async () => {
 		{ useNewUrlParser: true }
 	);
 
-	console.log(`MongoDB connected: ${dbConnection.connection.host}`);
+	console.log(`MongoDB connected at port ${dbConnection.connection.port}`);
 };
 
 module.exports = connectDB;
