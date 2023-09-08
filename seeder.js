@@ -16,13 +16,13 @@ mongoose.connect(
 
 const importTornadoes = async () => {
 	const tornadoes = JSON.parse(
-		fs.readFileSync(`${__dirname}/data/TornadoesC.json`, "utf-8")
+		fs.readFileSync(`${__dirname}/data/single-track-tornadoes.json`, "utf-8")
 	);
 
 	try {
 		await TornadoModel.insertMany(tornadoes);
 		console.log(
-			`${tornadoes.length} tornadoes imported into ${process.env.MONGODB_URI_LOCAL} using "data/single_track_tornadoes.json"`
+			`${tornadoes.length} tornadoes imported into ${process.env.MONGODB_URI_LOCAL} using "data/single-track-tornadoes.json"`
 		);
 		process.exit();
 	} catch (error) {
