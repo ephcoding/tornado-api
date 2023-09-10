@@ -17,22 +17,22 @@ const TornadoSchema = new mongoose.Schema({
 	},
 	state_fips: { type: Number },
 	state_yr_num: { type: Number },
-	scale: {
+	magnitude: {
 		type: Number,
 		index: true,
 	},
 	injuries: { type: Number },
 	fatalities: { type: Number },
-	damage: {
+	property_loss: {
 		type: mongoose.Schema.Types.Decimal128,
 	},
 	crop_loss: { type: mongoose.Schema.Types.Decimal128 },
-	start_lat: { type: mongoose.Schema.Types.Decimal128 },
-	start_lon: {
+	start_latitude: { type: mongoose.Schema.Types.Decimal128 },
+	start_longitude: {
 		type: mongoose.Schema.Types.Decimal128,
 	},
-	end_lat: { type: mongoose.Schema.Types.Decimal128 },
-	end_lon: { type: mongoose.Schema.Types.Decimal128 },
+	end_latitude: { type: mongoose.Schema.Types.Decimal128 },
+	end_longitude: { type: mongoose.Schema.Types.Decimal128 },
 	length_miles: { type: mongoose.Schema.Types.Decimal128 },
 	width_yards: { type: Number },
 	impacted_states: { type: Number },
