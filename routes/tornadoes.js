@@ -2,7 +2,7 @@ const express = require("express");
 const expressRouter = express.Router();
 const { queryBuilder } = require("../middleWare/query-builder");
 
-const TornadoModel = require("../models/tornado.js");
+const TornadoModel = require("../models/Tornado.js");
 
 const {
 	getAllTornadoes,

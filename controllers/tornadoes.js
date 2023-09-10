@@ -1,4 +1,4 @@
-const Tornado = require("../models/tornado.js");
+const Tornado = require("../models/Tornado.js");
 const { asyncHandler } = require("../middleWare/async-handler");
 const ErrorResponse = require("../utils/error-response");
 

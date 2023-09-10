@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
 
 const TornadoSchema = new mongoose.Schema({
-	// ADDED PROPS
-	created: { type: Date, default: Date.now },
-	updated: { type: Date, default: Date.now },
 	nws_num: { type: Number },
 	year: { type: Number, index: true, min: 1950 },
 	month: { type: Number, index: true, min: 1, max: 12 },
@@ -25,7 +22,7 @@ const TornadoSchema = new mongoose.Schema({
 		index: true,
 	},
 	injuries: { type: Number },
-	deaths: { type: Number },
+	fatalities: { type: Number },
 	damage: {
 		type: mongoose.Schema.Types.Decimal128,
 	},
@@ -47,5 +44,7 @@ const TornadoSchema = new mongoose.Schema({
 	county_4_fips: { type: Number },
 	scale_modified: { type: Boolean },
 });
+
+TornadoSchema.statics.getFatalityStatsByYear = async function (year) {};
 
 module.exports = mongoose.model("Tornado", TornadoSchema);

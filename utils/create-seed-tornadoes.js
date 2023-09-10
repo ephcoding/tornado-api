@@ -55,16 +55,10 @@ const createJsonFileFromCsv = async () => {
 };
 
 function writeJsonToFile(jsonData, count) {
-	fs.writeFile(
-		"data/single-track-tornadoes.json",
-		JSON.stringify(jsonData),
-		(error) => {
-			if (error) throw Error;
-			console.log(
-				`"data/single-track-tornadoes.json" created with ${count} entries.`
-			);
-		}
-	);
+	fs.writeFile("data/tornadoes.json", JSON.stringify(jsonData), (error) => {
+		if (error) throw Error;
+		console.log(`"data/tornadoes.json" created with ${count} entries.`);
+	});
 }
 
 createJsonFileFromCsv();
