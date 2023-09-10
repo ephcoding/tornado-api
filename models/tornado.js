@@ -6,9 +6,10 @@ const TornadoSchema = new mongoose.Schema({
 	month: { type: Number, index: true, min: 1, max: 12 },
 	day: { type: Number, min: 1, max: 31 },
 	date: { type: Date },
-	time: { type: String },
+	time: { type: String, trim: true },
 	timezone: {
 		type: String,
+		trim: true,
 	},
 	state_abbr: {
 		type: String,
