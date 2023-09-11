@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const Decimal = mongoose.Schema.Types.Decimal128;
 
 const AnnualFatalitiesSchema = new mongoose.Schema({
+	year: Number,
 	total_fatalities: Number,
 	by_magnitude: [
 		{
