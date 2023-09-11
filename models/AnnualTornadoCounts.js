@@ -2,24 +2,32 @@ import mongoose from "mongoose";
 
 const AnnualTornadoCountsSchema = new mongoose.Schema(
 	{
-		year: Number,
-		total_tornadoes: Number,
-		by_magnitude: [
-			{
-				magnitude: Number,
-				count: Number,
-			},
-		],
-		by_month: [
-			{
-				magnitude: Number,
-				count: Number,
-			},
-		],
-		by_state: [
+		year: {
+			type: Number,
+			required: true,
+			min: 1950,
+			max: 2022,
+		},
+		count: {
+			type: Number,
+			required: true,
+		},
+		state_data: [
 			{
 				state_abbr: String,
 				count: Number,
+				monthly_data: [
+					{
+						month: String,
+						count: Number,
+						magnitude_data: [
+							{
+								magnitude: Number,
+								count: Number,
+							},
+						],
+					},
+				],
 			},
 		],
 	},
